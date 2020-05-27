@@ -42,5 +42,3 @@ module BackendApi
     end
   end
 end
-
-
