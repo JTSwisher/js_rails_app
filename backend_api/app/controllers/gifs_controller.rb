@@ -1,2 +1,5 @@
 class GifsController < ApplicationController
+
+   
+    
 end
