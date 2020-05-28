@@ -7,16 +7,19 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
 
+
         <title>Gif Book</title>
     </head>
 
     <body>
-        <div class="login-form">
-            <form action="http://localhost/3000/gif/new" method="POST">
-                <label>Find a GIF<input type="text" name="" id="search"><label></label>
-                <button type="button" class="btn btn-secondary">Search</button>
+        <div id="login-form">
+            <form>
+                <p>Login/Sign_up</p>
+                <input class="session-text" type="text" name="" id="search"><br>
+                <input class="session-text" type="text" name="" id="search"><br>
+                <input type="submit" name="submit" value="submit" class="submit"/>
             </form>
-        </div>
+        </div><br>
 
 
         <div class="search-form">
@@ -34,6 +37,6 @@
 
         </div>
 
-
+        <script src="index.js"></script>
     </body>
 </html>
