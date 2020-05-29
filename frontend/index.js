@@ -62,11 +62,13 @@ function createMessage() {
     })
 }
 
-//class Gifs {
+class Gif {
 
   //constructor(url) {
   //  this.url = url
   //}
+
+}
   
   function searchGifEvent(){
     let form = document.getElementById('search-form');
@@ -100,9 +102,19 @@ function createMessage() {
     json["data"].forEach(element => {
       let img = document.createElement('img');
       img.src = element["images"]["fixed_height_small"]["url"]
+      img.addEventListener('click', gifEvent)
+      img.className = "gif";
+
       gifContainer.appendChild(img);
     });
 
+  }
+
+
+
+
+  function gifEvent() {
+    alert("Hello")
   }
 
   // fetch function returns gifs either based on user input or trending if no user input given
@@ -111,5 +123,5 @@ function createMessage() {
   // need to create objects for each GIF being created
   // need to clear list of gif search is hit again
 
-//}
+
 
