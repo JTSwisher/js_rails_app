@@ -46,19 +46,19 @@ function createSession() {
     form.addEventListener('submit', function(event){
       event.preventDefault();
       let input = document.getElementsByClassName('gif-text')
-      getGifs(input);
+      getGifs(input[0].value);
     })
-
   }
 
   function getGifs(param) {
     if (param) {
-       value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=2&offset=0&rating=G&lang=en`;
+       value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=25&offset=0&rating=G&lang=en`;
     } else {
        value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=25&offset=0&rating=G&lang=en";
     }
-
+    
     fetch(value)
+  
     .then(function(response) {
       return response.json();
     }).then(function(json){
