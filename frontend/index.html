@@ -12,31 +12,56 @@
     </head>
 
     <body>
-        <div id="login-form">
-            <form>
-                <p>Login/Sign_up</p>
-                <input class="session-text" type="text" name="" id="search"><br>
-                <input class="session-text" type="text" name="" id="search"><br>
-                <input type="submit" name="submit" value="submit" class="submit"/>
-            </form>
-        </div><br>
+        <container class="landing-page">
+            <div class="landing content">
+                <h1>Welcome to GifBook!</h1>
+                <div class="landing-form">
+                    <form id="login-form" >
+                        <h5>Login/SignUp</h5>
+                        <label for="username">Username</label>
+                        <input class="session-text form-control" type="text" name="" id="username"><br>
+                        <label for="password">Password</label>
+                        <input class="session-text form-control" type="text" name="" id="password"><br>
+                        <input type="submit" name="submit" value="submit" class="submit btn btn-primary"/>
+                    </form>
+                </div>
+                
+            </div>
+        </container>    
+            
 
 
-        <div id="search-form">
-            <form>
-                <p>Find GIFs</p>
-                <input class="gif-text" type="text" name="" id="search"><br>
-                <input type="submit" name="submit" value="submit" class="submit"/>
-            </form>
-        </div>
+                <div id="search-form">
+                    <form>
+                        <div class="form-group col-md-6">
+                            <p>Find GIFs</p>
+                            <input class="gif-text form-control" type="text" name="" id="search"><br>
+                            <input type="submit" name="submit" value="submit" class="submit btn-primary"/>
+                        </div>
+                    </form>
+                </div>
 
-        <div class="body-title">
-            <h1>GIFS</h1>
-        </div>
+                <form id="twilio-form" >
+                    <label for="username">number</label>
+                    <input class="message-text form-control col-md-6" type="text" name="" id="number"><br>
+                    <label for="password">message</label>
+                    <input class="message-text form-control col-md-6" type="text" name="" id="message"><br>
+                    <input type="submit" name="submit" value="submit" class="submit btn btn-primary"/>
+                </form>
 
-        <div id="gif-results">
+                <div class="body-title">
+                    <h1>GIFS</h1>
+                </div>
 
-        </div>
+                <div id="gif-results">
+
+                </div>
+            
+        
+
+        <footer class="footer fixed-bottom">
+            <span class="text-muted small mb-0">© Copyright 2020  GifBook</span>
+        </footer>
 
         <script src="index.js"></script>
     </body>

@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     createSession();
     searchGifEvent();
+    createMessage();
 })
 
 function createSession() {
@@ -34,6 +35,33 @@ function createSession() {
 //
 }
 
+function createMessage() {
+  let form = document.getElementById("twilio-form");
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let inputs = document.getElementsByClassName('message-text');
+        let number = inputs[0].value;
+        let message = inputs[1].value;
+          
+        let formData = {
+            number: number,
+            message: message,
+          };
+      
+          let configObj = {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+          };
+      
+          fetch("http://localhost:3000/messages", configObj);
+    })
+}
+
 //class Gifs {
 
   //constructor(url) {
@@ -52,13 +80,12 @@ function createSession() {
 
   function getGifs(param) {
     if (param) {
-       value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=25&offset=0&rating=G&lang=en`;
+       value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=50&offset=0&rating=G&lang=en`;
     } else {
        value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=25&offset=0&rating=G&lang=en";
     }
     
     fetch(value)
-  
     .then(function(response) {
       return response.json();
     }).then(function(json){
@@ -76,10 +103,13 @@ function createSession() {
       gifContainer.appendChild(img);
     });
 
-    
-    
-
   }
+
+  // fetch function returns gifs either based on user input or trending if no user input given
+  // need to add event listeners to each gif before being added to dom
+  // need to wrap each gif in a class to add styling later on
+  // need to create objects for each GIF being created
+  // need to clear list of gif search is hit again
 
 //}
 
