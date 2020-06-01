@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     createSession();
     searchGifEvent();
     createMessage();
-})
+    endSession();
+
+    let currentUser;
 
 function createSession() {
     let form = document.getElementById("login-form");
@@ -27,12 +29,28 @@ function createSession() {
             body: JSON.stringify(formData)
           };
       
-          fetch("http://localhost:3000/users", configObj);
+          fetch("http://localhost:3000/users", configObj)
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(object) {
+            currentUser = new User(object.id, object.username, true)
+            userStateDisplayChange(currentUser);
+          })
     })
+}
 
-    // hwo do we validate user being logged in on JS side
-// ? use state of user object after fetch to change to true to render rest of site? 
-//
+function userStateDisplayChange(currentUser) {
+  let landingPage = document.getElementById('landing-page')
+  currentUser.state ? landingPage.style.display="none" : landingPage.style.display="";
+}
+
+function endSession() {
+  let input = document.getElementById('logout')
+  input.addEventListener('click', function() {
+    currentUser.state = false
+    userStateDisplayChange(currentUser)
+  })
 }
 
 function createMessage() {
@@ -59,16 +77,11 @@ function createMessage() {
           };
       
           fetch("http://localhost:3000/messages", configObj);
+          event.target.reset();
     })
 }
 
-class Gif {
 
-  //constructor(url) {
-  //  this.url = url
-  //}
-
-}
   
   function searchGifEvent(){
     let form = document.getElementById('search-form');
@@ -77,6 +90,7 @@ class Gif {
       event.preventDefault();
       let input = document.getElementsByClassName('gif-text')
       getGifs(input[0].value);
+      event.target.reset();
     })
   }
 
@@ -118,10 +132,27 @@ class Gif {
   }
 
   // fetch function returns gifs either based on user input or trending if no user input given
-  // need to add event listeners to each gif before being added to dom
-  // need to wrap each gif in a class to add styling later on
+  
   // need to create objects for each GIF being created
   // need to clear list of gif search is hit again
 
+class User {
+ 
+  constructor(id, username, state) {
+    this.id = id;
+    this.username = username;
+    this.state = state
+  }
 
+}
+  
 
+  class Gif {
+
+    //constructor(url) {
+    //  this.url = url
+    //}
+  
+  }
+
+})

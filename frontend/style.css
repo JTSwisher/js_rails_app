@@ -4,9 +4,7 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
-    background: linear-gradient(45deg, #A8E6CE, #DCEDC2 ) no-repeat center center fixed;
-    animation: gradient 20s ease infinite;
-    background-repeat:no-repeat;
+    background-color: white;
   }
 
 
@@ -17,15 +15,18 @@ html, body {
     display: inline;
   }
 
-  .landing-page {
-    background-color: white;
+  #landing-page {
+    
+    background: linear-gradient(45deg, #A8E6CE, #DCEDC2 ) no-repeat center center fixed;
+    animation: gradient 20s ease infinite;
+    background-repeat:no-repeat;
     text-align: center;
     position: absolute;
     z-index: 2;
     height: 100%;
     width: 100%;
     margin: 0;
-    display: none; 
+    display: ; 
     opacity: 0.9;
   }
 
@@ -50,6 +51,9 @@ html, body {
   }
   
   .gif {
-      margin: 5px;
-      box-shadow: 2px 2px 4px #000000;
+    margin: 5px;
+    padding: 1px;
+    box-shadow: 2px 2px 4px #000000;
+    border: 1px solid  white;
+    border-radius: 10%;
   }

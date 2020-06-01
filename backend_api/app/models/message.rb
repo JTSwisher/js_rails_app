@@ -5,6 +5,7 @@ class Message < ApplicationRecord
 
         account_sid = ENV["TWILIO_ACCOUNT_SID"]
         auth_token = ENV["TWILIO_ACCOUNT_AUTH"]
+
         client = Twilio::REST::Client.new(account_sid, auth_token)
         
         from = '+12084081231' # Your Twilio number
