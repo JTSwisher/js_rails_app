@@ -3,8 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
     searchGifEvent();
     createMessage();
     endSession();
+    liveSession();
 
     let currentUser;
+
+
 
 function createSession() {
     let form = document.getElementById("login-form");
@@ -35,8 +38,10 @@ function createSession() {
           })
           .then(function(object) {
             currentUser = new User(object.id, object.username, true)
+            sessionStorage.setItem('user', currentUser)
             userStateDisplayChange(currentUser);
           })
+          event.target.reset();
     })
 }
 
@@ -48,9 +53,14 @@ function userStateDisplayChange(currentUser) {
 function endSession() {
   let input = document.getElementById('logout')
   input.addEventListener('click', function() {
-    currentUser.state = false
-    userStateDisplayChange(currentUser)
+    sessionStorage.clear()
+    liveSession();
   })
+}
+
+function liveSession() {
+  let landingPage = document.getElementById('landing-page');
+  sessionStorage.getItem("user") ? landingPage.style.display="none" : landingPage.style.display="";
 }
 
 function createMessage() {
@@ -125,8 +135,6 @@ function createMessage() {
   }
 
 
-
-
   function gifEvent() {
     alert("Hello")
   }
@@ -148,10 +156,6 @@ class User {
   
 
   class Gif {
-
-    //constructor(url) {
-    //  this.url = url
-    //}
   
   }
 
