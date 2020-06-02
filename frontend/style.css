@@ -4,7 +4,7 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
-    background: linear-gradient(45deg, #F53844, #42378F ) no-repeat center center fixed;
+    background: linear-gradient(45deg, #FFD8CB, #F9D29D ) no-repeat center center fixed;
     animation: gradient 20s ease infinite;
     background-repeat:no-repeat;
   }
@@ -45,6 +45,10 @@ html, body {
     padding: 10px;
   }
 
+  #gif-results {
+    margin: 5px;
+  }
+
   
 
   .landing-content {
@@ -68,14 +72,23 @@ html, body {
   }
   
   .gif {
-    margin: 5px;
-    padding: 1px;
-    box-shadow: 2px 2px 4px #000000;
-    border: 1px solid  white;
+    margin: 10px;
+    box-shadow: 1px 1px 2px white;
+    border: 2px solid  white;
     border-radius: 10%;
   }
 
   .card-button {
     display: inline;
     margin-left: 10px;
+    box-shadow: 2px 2px 4px #000000;
   }
+
+  .card {
+    border: 2px solid  grey;
+    border-radius: 10%;
+    background: linear-gradient(180deg, #B621FE, #1FD1F9) no-repeat center center fixed;
+    animation: gradient 20s ease infinite;
+    box-shadow: 2px 2px 4px #000000;
+  }
+

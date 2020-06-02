@@ -102,12 +102,15 @@ document.addEventListener("DOMContentLoaded", () => {
       })
   }
 
+  
 
   
   function searchGifEvent(){
     let form = document.getElementById('search-form');
 
     form.addEventListener('submit', function(event){
+      let gifContainer =  document.getElementById('gif-results')
+      gifContainer.innerHTML = ""
       event.preventDefault();
       let input = document.getElementsByClassName('gif-text')
       getGifs(input[0].value);
@@ -119,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (param) {
        value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=50&offset=0&rating=G&lang=en`;
     } else {
-       value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=25&offset=0&rating=G&lang=en";
+       value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=50&offset=0&rating=G&lang=en";
     }
     
     fetch(value)
@@ -151,8 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
       let saveButton = document.createElement('button')
       let messageButton = document.createElement('button')
 
-      saveButton.className = "btn btn-primary card-button"
-      messageButton.className = "btn btn-primary card-button"
+      saveButton.className = "btn btn-light card-button"
+      messageButton.className = "btn btn-light card-button"
 
       saveButton.innerText = "Save"
       messageButton.innerText = "Send SMS"
