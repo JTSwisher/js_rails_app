@@ -1,36 +1,25 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-    let currentUser;
-    
-   
     createSession();
     searchGifEvent();
     createMessage();
     endSession();
     liveSession();
-    
-
-  //function initUserOnReload() {
-    //sessionStorage.getItem("user") ? currentUser = new User(sessionStorage.id, sessionStorage.user)  : currentUser;
-  //}
-
   
- 
+  function createSession() {
+      let form = document.getElementById("login-form");
 
-function createSession() {
-    let form = document.getElementById("login-form");
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        let inputs = document.getElementsByClassName('session-text');
-        let username = inputs[0].value;
-        let password = inputs[1].value;
-      
-        let formData = {
-            username: username,
-            password: password,
+      form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          let inputs = document.getElementsByClassName('session-text');
+          let username = inputs[0].value;
+          let password = inputs[1].value;
+        
+          let formData = {
+              username: username,
+              password: password,
           };
-      
+        
           let configObj = {
             method: "POST", 
             headers: {
@@ -39,7 +28,7 @@ function createSession() {
             },
             body: JSON.stringify(formData)
           };
-      
+        
           fetch("http://localhost:3000/users", configObj)
           .then(function(response) {
             if (response.status >= 400) (
@@ -51,68 +40,70 @@ function createSession() {
             if (object.errors) {
               alert(object.errors)
             } else {
-              currentUser = new User(object.id, object.username, true)
               sessionStorage.setItem('id', object.id)
               sessionStorage.setItem('user', object.username)
               liveSession();
             }
-           
+            
           })
-          event.target.reset();
-    })
-}
+        event.target.reset();
+      })
+  }
 
 //function userStateDisplayChange(currentUser) {
   //let landingPage = document.getElementById('landing-page')
   //currentUser.state ? landingPage.style.display="none" : landingPage.style.display="";
 //}
 
-function liveSession() {
-  let landingPage = document.getElementById('landing-page');
-  if (sessionStorage.getItem("user") ) {
-    landingPage.style.display="none";
-  } else {
-    landingPage.style.display="";
+  function liveSession() {
+    let landingPage = document.getElementById('landing-page');
+    let nav = document.getElementById('nav');
+    if (sessionStorage.getItem("user") ) {
+      landingPage.style.display="none";
+      nav.style.display=""
+    } else {
+      landingPage.style.display="";
+      nav.style.display="none"
+    }
   }
-}
 
-function endSession() {
-  let input = document.getElementById('logout')
-  input.addEventListener('click', function() {
-    sessionStorage.clear()
-    liveSession();
-  })
-}
-
-
-
-function createMessage() {
-  let form = document.getElementById("twilio-form");
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        let inputs = document.getElementsByClassName('message-text');
-        let number = inputs[0].value;
-        let message = inputs[1].value;
-          
-        let formData = {
-            number: number,
-            message: message,
-          };
-      
-          let configObj = {
-            method: "POST", 
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            },
-            body: JSON.stringify(formData)
-          };
-      
-          fetch("http://localhost:3000/messages", configObj);
-          event.target.reset();
+  function endSession() {
+    let input = document.getElementById('logout')
+    input.addEventListener('click', function() {
+      sessionStorage.clear()
+      liveSession();
     })
-}
+  }
+
+
+
+  function createMessage() {
+    let form = document.getElementById("twilio-form");
+
+      form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          let inputs = document.getElementsByClassName('message-text');
+          let number = inputs[0].value;
+          let message = inputs[1].value;
+            
+          let formData = {
+              number: number,
+              message: message,
+            };
+        
+            let configObj = {
+              method: "POST", 
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify(formData)
+            };
+        
+            fetch("http://localhost:3000/messages", configObj);
+            event.target.reset();
+      })
+  }
 
 
   
@@ -167,21 +158,10 @@ function createMessage() {
   // need to create objects for each GIF being created
   // need to clear list of gif search is hit again
 
-class User {
- 
-  constructor(id, username, state) {
-    this.id = id;
-    this.username = username;
-    this.state = state
-  }
-
-}
-
-
-  
-
   class Gif {
-  
+    constructor(url) {
+      this.url = url
+    }
   }
 
 })

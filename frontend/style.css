@@ -4,10 +4,12 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
-    background-color: white;
+    background: linear-gradient(45deg, #F53844, #42378F ) no-repeat center center fixed;
+    animation: gradient 20s ease infinite;
+    background-repeat:no-repeat;
   }
 
-
+  
 
   .form {
     padding-left: 15%;
@@ -17,7 +19,7 @@ html, body {
 
   #landing-page {
     
-    background: linear-gradient(45deg, #A8E6CE, #DCEDC2 ) no-repeat center center fixed;
+    background: linear-gradient(45deg, #7F8C8D, #000000 ) no-repeat center center fixed;
     animation: gradient 20s ease infinite;
     background-repeat:no-repeat;
     text-align: center;
@@ -26,7 +28,24 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
+    padding-top: 70px;
+    color: white;
   }
+
+  #main-page {
+    background-color: white;
+    position: absolute;
+    z-index: 2;
+    height: 89%;
+    width: 85%;
+    display: inline-block;
+    margin: 20px 20px 40px 100px;
+    overflow: scroll;
+    border-radius: 2%;
+    
+  }
+
+  
 
   .landing-content {
     display: inline-block;
