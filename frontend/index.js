@@ -50,10 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
   }
 
-//function userStateDisplayChange(currentUser) {
-  //let landingPage = document.getElementById('landing-page')
-  //currentUser.state ? landingPage.style.display="none" : landingPage.style.display="";
-//}
+
 
   function liveSession() {
     let landingPage = document.getElementById('landing-page');
@@ -136,17 +133,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displayGifs(json) {
     let gifContainer =  document.getElementById('gif-results')
+    let cardDeck = document.createElement('div');
+    cardDeck.className = 'row row-cols-1 row-cols-md-4';
+    gifContainer.appendChild(cardDeck)
 
     json["data"].forEach(element => {
       let img = document.createElement('img');
-      img.src = element["images"]["fixed_height_small"]["url"]
+      img.src = element["images"]["fixed_height"]["url"]
       img.addEventListener('click', gifEvent)
-      img.className = "gif";
+      img.className = "gif ";
+      
+      let cardCol = document.createElement('div');
+      cardCol.className = "col mb-4"
+      let card = document.createElement('div');
+      card.className = "card h-100"
 
-      gifContainer.appendChild(img);
+      
+
+      
+      cardDeck.appendChild(cardCol)
+      cardCol.appendChild(card)
+      card.appendChild(img)
     });
 
   }
+
+
 
 
   function gifEvent() {
