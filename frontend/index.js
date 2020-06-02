@@ -1,13 +1,21 @@
+
 document.addEventListener("DOMContentLoaded", () => {
+    let currentUser;
+    
+   
     createSession();
     searchGifEvent();
     createMessage();
     endSession();
     liveSession();
+    
 
-    let currentUser;
+  //function initUserOnReload() {
+    //sessionStorage.getItem("user") ? currentUser = new User(sessionStorage.id, sessionStorage.user)  : currentUser;
+  //}
 
-
+  
+ 
 
 function createSession() {
     let form = document.getElementById("login-form");
@@ -34,20 +42,38 @@ function createSession() {
       
           fetch("http://localhost:3000/users", configObj)
           .then(function(response) {
+            if (response.status >= 400) (
+              console.log(response.errors)
+            )
             return response.json();
           })
           .then(function(object) {
-            currentUser = new User(object.id, object.username, true)
-            sessionStorage.setItem('user', currentUser)
-            userStateDisplayChange(currentUser);
+            if (object.errors) {
+              alert(object.errors)
+            } else {
+              currentUser = new User(object.id, object.username, true)
+              sessionStorage.setItem('id', object.id)
+              sessionStorage.setItem('user', object.username)
+              liveSession();
+            }
+           
           })
           event.target.reset();
     })
 }
 
-function userStateDisplayChange(currentUser) {
-  let landingPage = document.getElementById('landing-page')
-  currentUser.state ? landingPage.style.display="none" : landingPage.style.display="";
+//function userStateDisplayChange(currentUser) {
+  //let landingPage = document.getElementById('landing-page')
+  //currentUser.state ? landingPage.style.display="none" : landingPage.style.display="";
+//}
+
+function liveSession() {
+  let landingPage = document.getElementById('landing-page');
+  if (sessionStorage.getItem("user") ) {
+    landingPage.style.display="none";
+  } else {
+    landingPage.style.display="";
+  }
 }
 
 function endSession() {
@@ -58,10 +84,7 @@ function endSession() {
   })
 }
 
-function liveSession() {
-  let landingPage = document.getElementById('landing-page');
-  sessionStorage.getItem("user") ? landingPage.style.display="none" : landingPage.style.display="";
-}
+
 
 function createMessage() {
   let form = document.getElementById("twilio-form");
@@ -153,6 +176,8 @@ class User {
   }
 
 }
+
+
   
 
   class Gif {
