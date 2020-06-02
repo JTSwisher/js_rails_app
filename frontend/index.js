@@ -82,10 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
           let inputs = document.getElementsByClassName('message-text');
           let number = inputs[0].value;
           let message = inputs[1].value;
-            
+          let gif = inputs[2].value;  
+
           let formData = {
               number: number,
               message: message,
+              gif: gif
             };
         
             let configObj = {
@@ -109,8 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let form = document.getElementById('search-form');
 
     form.addEventListener('submit', function(event){
-      let gifContainer =  document.getElementById('gif-results')
-      gifContainer.innerHTML = ""
+
       event.preventDefault();
       let input = document.getElementsByClassName('gif-text')
       getGifs(input[0].value);
@@ -136,6 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displayGifs(json) {
     let gifContainer =  document.getElementById('gif-results')
+    gifContainer.innerHTML = ""
+    
     let cardDeck = document.createElement('div');
     cardDeck.className = 'row row-cols-1 row-cols-md-4';
     gifContainer.appendChild(cardDeck)
@@ -190,7 +193,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function messageEvent(img) {
-    console.log(img.src)
+    let gifValue = document.getElementById('message-gif')
+    $('#exampleModal')
+    .on('show.bs.modal', function() {
+      gifValue.value = img.src
+    }).modal('show');
   }
 
   function gifEvent() {

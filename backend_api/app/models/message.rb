@@ -1,7 +1,7 @@
 class Message < ApplicationRecord
     require 'twilio-ruby'
 
-    def self.new_message(number, message)
+    def self.new_message(number, message, url)
 
         account_sid = ENV["TWILIO_ACCOUNT_SID"]
         auth_token = ENV["TWILIO_ACCOUNT_AUTH"]
@@ -15,7 +15,7 @@ class Message < ApplicationRecord
         from: from,
         to: to,
         body: "#{message}",
-        #media_url: ["#{url}"]
+        media_url: ["#{url}"]
         )
     end 
 
