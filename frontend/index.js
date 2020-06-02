@@ -148,18 +148,47 @@ document.addEventListener("DOMContentLoaded", () => {
       let card = document.createElement('div');
       card.className = "card h-100"
 
-      
+      let saveButton = document.createElement('button')
+      let messageButton = document.createElement('button')
 
+      saveButton.className = "btn btn-primary card-button"
+      messageButton.className = "btn btn-primary card-button"
+
+      saveButton.innerText = "Save"
+      messageButton.innerText = "Send SMS"
+
+      saveButton.type = "button"
+      messageButton.type = "button"
+
+      saveButton.addEventListener('click', function(){
+        saveEvent(img);
+      })
+      messageButton.addEventListener('click', function(){
+        messageEvent(img);
+      })
+      
+      let cardBody = document.createElement('div')
+      cardBody.className = "card-body"
       
       cardDeck.appendChild(cardCol)
       cardCol.appendChild(card)
       card.appendChild(img)
+      card.appendChild(cardBody)
+      cardBody.appendChild(saveButton)
+      cardBody.appendChild(messageButton)
+      
     });
 
   }
 
 
+  function saveEvent(img) {
+    console.log(img.src)
+  }
 
+  function messageEvent(img) {
+    console.log(img.src)
+  }
 
   function gifEvent() {
     alert("Hello")
