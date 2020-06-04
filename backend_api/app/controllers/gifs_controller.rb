@@ -6,7 +6,7 @@ class GifsController < ApplicationController
    end 
 
    def create
-      gif = Gif.create(url: params["gif_url"], user_id: params["user_id"])
+      gif = Gif.find_or_create_by(url: params["gif_url"]).where(user_id: params["user_id"])
    end 
 
    def destroy

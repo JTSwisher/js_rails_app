@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     endSession();
     liveSession();
 
+    const myGifsBtn = document.getElementById('user-gifs').addEventListener('click', getUserGifs)
 
 // USER SESSIONS  
   function createSession() {
@@ -157,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let collection = json.map(element => {
         return element = new Gif(element["id"], element["url"], element["user_id"])
       })
-      
+
       displayGifs(collection);
     })
   }
@@ -230,7 +231,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     fetch("http://localhost:3000/gifs", configObj);
-    getUserGifs();
+   // .then(function(){
+   //   getUserGifs()
+   // })
   }
 
  
