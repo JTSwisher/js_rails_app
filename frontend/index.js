@@ -130,21 +130,39 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
        value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=75&offset=0&rating=G&lang=en";
     }
-    
     fetch(value)
     .then(function(response) {
       return response.json();
     }).then(function(json){
-      displayGifs(json);
+      let collection = json["data"].map(element => {
+        return element = new Gif(null, element["images"]["fixed_height"]["url"], null)
+      })
+      displayGifs(collection);
     })
   }
 
-  function displayUserGifs() {
+  function getUserGifs() {
+    let configObj = {
+      method: "get", 
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+    };
 
-
+    fetch(`http://localhost:3000/users/${sessionStorage.id}/gifs`, configObj)
+    .then(function(response) {
+      return response.json();
+    }).then(function(json){
+      let collection = json.map(element => {
+        return element = new Gif(element["id"], element["url"], element["user_id"])
+      })
+      
+      displayGifs(collection);
+    })
   }
 
-  function displayGifs(json) {
+  function displayGifs(collection) {
     let gifContainer =  document.getElementById('gif-results')
     gifContainer.innerHTML = ""
     
@@ -152,9 +170,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cardDeck.className = 'row row-cols-1 row-cols-md-4';
     gifContainer.appendChild(cardDeck)
 
-    json["data"].forEach(element => {
+    collection.forEach(element => {
       let img = document.createElement('img');
-      img.src = element["images"]["fixed_height"]["url"]
+      img.src = element["url"]
       img.className = "gif ";
       
       let cardCol = document.createElement('div');
@@ -168,15 +186,15 @@ document.addEventListener("DOMContentLoaded", () => {
       saveButton.className = "btn btn-light card-button"
       messageButton.className = "btn btn-light card-button"
 
-      saveButton.innerText = "Save"
-      messageButton.innerText = "Send SMS"
+      saveButton.innerText = "save"
+      messageButton.innerText = "send sms"
 
       saveButton.type = "button"
       messageButton.type = "button"
 
       //abstract save/delete button into function to determine label
       saveButton.addEventListener('click', function(){
-        saveEvent(img);
+        saveGifEvent(img);
       })
       messageButton.addEventListener('click', function(){
         messageEvent(img);
@@ -196,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  function saveEvent(img) {
+  function saveGifEvent(img) {
     let formData = {
       gif_url: img.src,
       user_id: sessionStorage.id
@@ -211,21 +229,19 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify(formData)
     };
 
-    fetch("http://localhost:3000/gifs", configObj)
-    .then(function(response) {
-      debugger
-      return response.json();
-    }).then(function(json){
-      displayGifs(json);
-    })
+    fetch("http://localhost:3000/gifs", configObj);
+    getUserGifs();
   }
 
  
 
 
   class Gif {
-    constructor(url) {
-      this.url = url
+    constructor(id = null, url, user_id = null) {
+      this.id = id,
+      this.url = url,
+      this.user_id = user_id
+
     }
   }
 
