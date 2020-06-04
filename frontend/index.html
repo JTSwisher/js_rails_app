@@ -16,7 +16,7 @@
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Send Text</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Send via Text</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -29,8 +29,8 @@
                         <input class="message-text form-control" type="text" name="" id="message"><br>
                         <input class="message-text" id="message-gif" type="hidden">
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <input id="modal-submit" type="submit" name="submit" value="submit" class="submit btn btn-primary"/>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
@@ -46,7 +46,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <input type="submit" name="submit" value="logout" class="btn btn-primary" id="logout"/>
+                        <input type="submit" name="submit" value="my gifs" class="btn btn-info nav-btns" id="user-gifs"/>
+                    </li>
+                    <li class="nav-item">
+                        <input type="submit" name="submit" value="logout" class="btn btn-info nav-btns" id="logout"/>
                     </li>
                 </ul>
             </div>
@@ -74,15 +77,11 @@
             <div id="search-form">
                 <form>
                     <div class="form-group col-md-6">
-                        <p>Find GIFs</p>
+                        <h3>Find GIFs</h3>
                         <input class="gif-text form-control" type="text" name="" id="search"><br>
-                        <input type="submit" name="submit" value="search" class="submit btn btn-primary"/>
+                        <input type="submit" name="submit" value="search" class="submit btn btn-info"/>
                     </div>
                 </form>
-            </div>
-
-            <div class="body-title">
-                <h1>GIFS</h1>
             </div>
 
             <div id="gif-results">

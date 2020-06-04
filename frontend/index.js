@@ -1,11 +1,12 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     createSession();
     searchGifEvent();
     createMessage();
     endSession();
     liveSession();
-  
+
+
+// USER SESSIONS  
   function createSession() {
       let form = document.getElementById("login-form");
 
@@ -50,8 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
       })
   }
 
-
-
   function liveSession() {
     let landingPage = document.getElementById('landing-page');
     let nav = document.getElementById('nav');
@@ -71,9 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
       liveSession();
     })
   }
+// USER SESSIONS  
 
-
-
+// MESSAGES
   function createMessage() {
     let form = document.getElementById("twilio-form");
 
@@ -104,14 +103,20 @@ document.addEventListener("DOMContentLoaded", () => {
       })
   }
 
-  
+  function messageEvent(img) {
+    let gifValue = document.getElementById('message-gif')
+    $('#exampleModal')
+    .on('show.bs.modal', function() {
+      gifValue.value = img.src
+    }).modal('show');
+  }
+// MESSAGES  
 
-  
+// GIFS
   function searchGifEvent(){
     let form = document.getElementById('search-form');
 
     form.addEventListener('submit', function(event){
-
       event.preventDefault();
       let input = document.getElementsByClassName('gif-text')
       getGifs(input[0].value);
@@ -121,9 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getGifs(param) {
     if (param) {
-       value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=50&offset=0&rating=G&lang=en`;
+       value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=75&offset=0&rating=G&lang=en`;
     } else {
-       value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=50&offset=0&rating=G&lang=en";
+       value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=75&offset=0&rating=G&lang=en";
     }
     
     fetch(value)
@@ -132,6 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(function(json){
       displayGifs(json);
     })
+  }
+
+  function displayUserGifs() {
+
 
   }
 
@@ -146,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
     json["data"].forEach(element => {
       let img = document.createElement('img');
       img.src = element["images"]["fixed_height"]["url"]
-      img.addEventListener('click', gifEvent)
       img.className = "gif ";
       
       let cardCol = document.createElement('div');
@@ -166,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       saveButton.type = "button"
       messageButton.type = "button"
 
+      //abstract save/delete button into function to determine label
       saveButton.addEventListener('click', function(){
         saveEvent(img);
       })
@@ -175,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       let cardBody = document.createElement('div')
       cardBody.className = "card-body"
-      
+    
       cardDeck.appendChild(cardCol)
       cardCol.appendChild(card)
       card.appendChild(img)
@@ -184,35 +193,43 @@ document.addEventListener("DOMContentLoaded", () => {
       cardBody.appendChild(messageButton)
       
     });
-
   }
 
 
   function saveEvent(img) {
-    console.log(img.src)
+    let formData = {
+      gif_url: img.src,
+      user_id: sessionStorage.id
+    };
+
+    let configObj = {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(formData)
+    };
+
+    fetch("http://localhost:3000/gifs", configObj)
+    .then(function(response) {
+      debugger
+      return response.json();
+    }).then(function(json){
+      displayGifs(json);
+    })
   }
 
-  function messageEvent(img) {
-    let gifValue = document.getElementById('message-gif')
-    $('#exampleModal')
-    .on('show.bs.modal', function() {
-      gifValue.value = img.src
-    }).modal('show');
-  }
+ 
 
-  function gifEvent() {
-    alert("Hello")
-  }
-
-  // fetch function returns gifs either based on user input or trending if no user input given
-  
-  // need to create objects for each GIF being created
-  // need to clear list of gif search is hit again
 
   class Gif {
     constructor(url) {
       this.url = url
     }
   }
+
+
+ // GIFS 
 
 })

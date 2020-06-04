@@ -4,8 +4,7 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
-    background: linear-gradient(45deg, #FFD8CB, #F9D29D ) no-repeat center center fixed;
-    animation: gradient 20s ease infinite;
+    background-color: #F9D29D;
     background-repeat:no-repeat;
   }
 
@@ -45,6 +44,10 @@ html, body {
     padding: 10px;
   }
 
+  #nav {
+    background-color: #BFCDE0;
+  }
+
   #gif-results {
     margin: 5px;
   }
@@ -73,7 +76,7 @@ html, body {
   
   .gif {
     margin: 10px;
-    box-shadow: 1px 1px 2px white;
+    box-shadow: 1px 1px 2px grey;
     border: 2px solid  white;
     border-radius: 10%;
   }
@@ -81,14 +84,17 @@ html, body {
   .card-button {
     display: inline;
     margin-left: 10px;
-    box-shadow: 2px 2px 4px #000000;
+    box-shadow: 2px 2px 4px grey;
   }
 
   .card {
-    border: 2px solid  grey;
     border-radius: 10%;
-    background: linear-gradient(180deg, #B621FE, #1FD1F9) no-repeat center center fixed;
-    animation: gradient 20s ease infinite;
-    box-shadow: 2px 2px 4px #000000;
+    background-color: #FFD8CB;
+    box-shadow: 3px 3px 6px grey;
+  }
+
+  .nav-btns {
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
