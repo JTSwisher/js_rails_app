@@ -9,7 +9,7 @@ class Message < ApplicationRecord
         client = Twilio::REST::Client.new(account_sid, auth_token)
         
         from = '+12084081231' # Your Twilio number
-        to = "14804549839" # Your mobile phone number
+        to = "#{number}" # Your mobile phone number
         
         client.messages.create(
         from: from,

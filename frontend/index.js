@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const myGifsBtn = document.getElementById('user-gifs').addEventListener('click', getUserGifs)
 
+    const myGifsTitle = document.getElementById('my-gifs')
+    myGifsTitle.style.display = "none"
+
 // USER SESSIONS  
   function createSession() {
       let form = document.getElementById("login-form");
@@ -126,6 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getGifs(param) {
+    myGifsTitle.style.display = "none"
+
     if (param) {
        value = `https://api.giphy.com/v1/gifs/search?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&q=${param}&limit=75&offset=0&rating=G&lang=en`;
     } else {
@@ -138,11 +143,12 @@ document.addEventListener("DOMContentLoaded", () => {
       let collection = json["data"].map(element => {
         return element = new Gif(null, element["images"]["fixed_height"]["url"], null)
       })
-      displayGifs(collection);
+    displayGifs(collection);
     })
   }
 
   function getUserGifs() {
+    myGifsTitle.style.display = ""
     let configObj = {
       method: "get", 
       headers: {
@@ -158,8 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let collection = json.map(element => {
         return element = new Gif(element["id"], element["url"], element["user_id"])
       })
-
-      displayGifs(collection);
+    displayGifs(collection);
     })
   }
 
@@ -233,12 +238,10 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("http://localhost:3000/gifs", configObj);
    // .then(function(){
    //   getUserGifs()
-   // })
+   // }) commenting in takes user to their gif index page after saving new gif to their account. 
   }
 
  
-
-
   class Gif {
     constructor(id = null, url, user_id = null) {
       this.id = id,
@@ -247,7 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
   }
-
 
  // GIFS 
 
