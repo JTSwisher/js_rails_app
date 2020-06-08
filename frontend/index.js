@@ -186,22 +186,29 @@ document.addEventListener("DOMContentLoaded", () => {
       let card = document.createElement('div');
       card.className = "card h-100"
 
-      let saveButton = document.createElement('button')
+      let actionButton = document.createElement('button')
       let messageButton = document.createElement('button')
 
-      saveButton.className = "btn btn-light card-button"
+      actionButton.className = "btn btn-light card-button"
       messageButton.className = "btn btn-light card-button"
 
-      saveButton.innerText = "save"
-      messageButton.innerText = "send sms"
-
-      saveButton.type = "button"
+      actionButton.type = "button"
       messageButton.type = "button"
 
-      //abstract save/delete button into function to determine label
-      saveButton.addEventListener('click', function(){
-        saveGifEvent(img);
-      })
+      messageButton.innerText = "send sms"
+
+      if (element.user_id) {
+        actionButton.innerText = "delete"
+        actionButton.addEventListener('click', function(){
+          deleteGifEvent(element);
+        })
+      } else {
+        actionButton.innerText = "save"
+        actionButton.addEventListener('click', function(){
+          saveGifEvent(img);
+        })
+      }
+  
       messageButton.addEventListener('click', function(){
         messageEvent(img);
       })
@@ -213,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cardCol.appendChild(card)
       card.appendChild(img)
       card.appendChild(cardBody)
-      cardBody.appendChild(saveButton)
+      cardBody.appendChild(actionButton)
       cardBody.appendChild(messageButton)
       
     });
@@ -239,6 +246,29 @@ document.addEventListener("DOMContentLoaded", () => {
    // .then(function(){
    //   getUserGifs()
    // }) commenting in takes user to their gif index page after saving new gif to their account. 
+  }
+
+  function deleteGifEvent(gif) {
+
+    //let formData = {
+      //id: gif.id,
+      //user_id: gif.user_id
+    //};
+
+    let configObj = {
+      method: "DELETE", 
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      //body: JSON.stringify(formData)
+    };
+
+    fetch(`http://localhost:3000/users/${gif.user_id}/gifs/${gif.id}`, configObj)
+    .then(function(){
+      getUserGifs()
+    }) 
+
   }
 
  

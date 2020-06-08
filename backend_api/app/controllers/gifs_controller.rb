@@ -10,7 +10,8 @@ class GifsController < ApplicationController
    end 
 
    def destroy
-
+      gif = Gif.find_by(id: params["id"])
+      gif.destroy
    end
     
 end
