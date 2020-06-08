@@ -6,6 +6,7 @@
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <title>Gif Book</title>
@@ -23,7 +24,7 @@
                   </button>
                 </div>
                 <div id="modal-body">
-                    <form id="twilio-form" class="col-md-9" >
+                    <form id="twilio-form" class="col-md-9 form-inline" >
                         <label for="username">number</label>
                         <input class="message-text form-control" type="text" name="" id="number" placeholder="ex: 12345678910"><br>
                         <label for="password">message</label>
@@ -31,7 +32,7 @@
                         <input class="message-text" id="message-gif" type="hidden">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <input id="modal-submit" type="submit" name="submit" value="submit" class="submit btn btn-info"/>
+                            <input id="modal-submit" type="submit" name="submit" value="submit" class="btn btn-info"/>
                         </div>
                     </form>
                 </div>
@@ -67,14 +68,14 @@
                         <input class="session-text form-control" type="text" name="" id="username"><br>
                         <label for="password">Password</label>
                         <input class="session-text form-control" type="password" name="" id="password"><br>
-                        <input type="submit" name="submit" value="submit" class="submit btn btn-info"/>
+                        <input type="submit" name="submit" value="submit" class="submit-login btn btn-info"/>
                     </form>
                 </div>
             </div>
         </container>    
             
         <!-- Gif search  -->
-        <container id="main-page">
+        <container id="main-page" >
             <div id="search-form">
                 <h3 id="search-title">Find GIFs</h3>
                 <form class="form-inline">
@@ -86,7 +87,7 @@
             </div>
 
             <div id="my-gifs">
-                <h3>My Gifs</h3>
+                <h3>My GIFs</h3>
                 <hr class="hr">
             </div>
 

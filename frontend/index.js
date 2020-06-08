@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createMessage();
     endSession();
     liveSession();
+   
 
     const myGifsBtn = document.getElementById('user-gifs').addEventListener('click', getUserGifs)
 
@@ -80,31 +81,31 @@ document.addEventListener("DOMContentLoaded", () => {
   function createMessage() {
     let form = document.getElementById("twilio-form");
 
-      form.addEventListener('submit', function(event) {
-          event.preventDefault();
-          let inputs = document.getElementsByClassName('message-text');
-          let number = inputs[0].value;
-          let message = inputs[1].value;
-          let gif = inputs[2].value;  
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let inputs = document.getElementsByClassName('message-text');
+        let number = inputs[0].value;
+        let message = inputs[1].value;
+        let gif = inputs[2].value;  
 
-          let formData = {
-              number: number,
-              message: message,
-              gif: gif
-            };
-        
-            let configObj = {
-              method: "POST", 
-              headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-              },
-              body: JSON.stringify(formData)
-            };
-        
-            fetch("http://localhost:3000/messages", configObj);
-            event.target.reset();
-      })
+        let formData = {
+            number: number,
+            message: message,
+            gif: gif
+          };
+      
+          let configObj = {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+          };
+      
+          fetch("http://localhost:3000/messages", configObj);
+          event.target.reset();
+    })
   }
 
   function messageEvent(img) {
@@ -136,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
        value = "https://api.giphy.com/v1/gifs/trending?api_key=e0AvkN0goRu200cWCCOSRaAHS1x5I3Y6&limit=75&offset=0&rating=G&lang=en";
     }
+
     fetch(value)
     .then(function(response) {
       return response.json();
@@ -186,24 +188,22 @@ document.addEventListener("DOMContentLoaded", () => {
       let card = document.createElement('div');
       card.className = "card h-100"
 
-      let actionButton = document.createElement('button')
-      let messageButton = document.createElement('button')
+      let actionButton = document.createElement('span')
+      actionButton.className = "material-icons md-48 md-light"
+      actionButton.style.cursor = "pointer"
 
-      actionButton.className = "btn btn-light card-button"
-      messageButton.className = "btn btn-light card-button"
-
-      actionButton.type = "button"
-      messageButton.type = "button"
-
-      messageButton.innerText = "send sms"
+      let messageButton = document.createElement('span')
+      messageButton.className = "material-icons md-48 md-light message-btn"
+      messageButton.innerText = "textsms"
+      messageButton.style.cursor = "pointer"
 
       if (element.user_id) {
-        actionButton.innerText = "delete"
+        actionButton.innerText = "remove_circle"
         actionButton.addEventListener('click', function(){
           deleteGifEvent(element);
         })
       } else {
-        actionButton.innerText = "save"
+        actionButton.innerText = "add_circle"
         actionButton.addEventListener('click', function(){
           saveGifEvent(img);
         })
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       messageButton.addEventListener('click', function(){
         messageEvent(img);
       })
-      
+
       let cardBody = document.createElement('div')
       cardBody.className = "card-body"
     
@@ -222,14 +222,13 @@ document.addEventListener("DOMContentLoaded", () => {
       card.appendChild(cardBody)
       cardBody.appendChild(actionButton)
       cardBody.appendChild(messageButton)
-      
     });
   }
 
 
-  function saveGifEvent(img) {
+  function saveGifEvent(gif) {
     let formData = {
-      gif_url: img.src,
+      gif_url: gif.src,
       user_id: sessionStorage.id
     };
 
@@ -242,33 +241,28 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify(formData)
     };
 
-    fetch("http://localhost:3000/gifs", configObj);
-   // .then(function(){
-   //   getUserGifs()
-   // }) commenting in takes user to their gif index page after saving new gif to their account. 
+    fetch("http://localhost:3000/gifs", configObj)
+    .then(function(){
+      alert("Gif saved succesfully")
+    }) 
   }
 
   function deleteGifEvent(gif) {
-
-    //let formData = {
-      //id: gif.id,
-      //user_id: gif.user_id
-    //};
-
     let configObj = {
       method: "DELETE", 
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      //body: JSON.stringify(formData)
     };
 
     fetch(`http://localhost:3000/users/${gif.user_id}/gifs/${gif.id}`, configObj)
     .then(function(){
       getUserGifs()
+    })
+    .then(function(){
+      alert("Gif deleted succesfully")
     }) 
-
   }
 
  
