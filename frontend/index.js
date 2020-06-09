@@ -171,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayGifs(collection) {
+    
     let gifContainer =  document.getElementById('gif-results')
     gifContainer.innerHTML = ""
     
