@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(formData)
           };
         
-          fetch("https://gif-book.herokuapp.com/users", configObj)
+          fetch("http://localhost:3000/users", configObj)
           .then(function(response) {
             if (response.status >= 400) (
               console.log(response.errors)
