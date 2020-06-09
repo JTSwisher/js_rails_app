@@ -35,13 +35,13 @@ html, body {
     height: 85%;
     width: 85%;
     display: inline-block;
-    margin: 20px 20px 40px 100px;
+    margin-top: 20px;
+    margin-left: 7%;
+    margin-bottom: 40px;
     overflow: scroll;
     border-radius: 2%;
     padding: 10px;
   }
-
-
 
   #gif-results {
     margin: 20px 5px 5px 5px;
@@ -61,8 +61,8 @@ html, body {
   }
   
   .hr {
-    height: 2px;
-    background: grey;
+    height: 1.3px;
+    background: black;
     border: none;
     width: 95%;
   }

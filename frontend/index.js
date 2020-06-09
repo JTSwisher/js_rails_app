@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(formData)
           };
         
-          fetch("http://localhost:3000/users", configObj)
+          fetch("https://gif-book.herokuapp.com/users", configObj)
           .then(function(response) {
             if (response.status >= 400) (
               console.log(response.errors)
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gifContainer.innerHTML = ""
     
     let cardDeck = document.createElement('div');
-    cardDeck.className = 'row row-cols-1 row-cols-md-4';
+    cardDeck.className = 'row row-cols-1 row-cols-md-5';
     gifContainer.appendChild(cardDeck)
 
     collection.forEach(element => {
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let cardCol = document.createElement('div');
       cardCol.className = "col mb-4"
       let card = document.createElement('div');
-      card.className = "card h-100"
+      card.className = "card h-80"
 
       let actionButton = document.createElement('span')
       actionButton.className = "material-icons md-48 md-light"
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch("http://localhost:3000/gifs", configObj)
     .then(function(){
-      alert("Gif saved succesfully")
+      alert("GIF saved successfully!")
     }) 
   }
 
@@ -261,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
       getUserGifs()
     })
     .then(function(){
-      alert("Gif deleted succesfully")
+      alert("GIF deleted successfully!")
     }) 
   }
 
