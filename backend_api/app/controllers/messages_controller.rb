@@ -4,5 +4,4 @@ class MessagesController < ApplicationController
         Message.new_message(params["number"], params["message"], params["gif"])
     end 
 
-
 end 

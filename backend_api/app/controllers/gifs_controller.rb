@@ -2,8 +2,8 @@ class GifsController < ApplicationController
 
    def index
       gifs = Gif.all.where(:user_id => params["user_id"])
-      ordered_gifs = gifs.reverse
-      render json: ordered_gifs, only: [:id, :url, :user_id]
+      newest_first_gifs = gifs.reverse
+      render json: newest_first_gifs, only: [:id, :url, :user_id]
    end 
 
    def create
