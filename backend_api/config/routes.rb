@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :gifs
-  resources :users do 
-    resources :gifs
-  end 
-  resources :messages
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  resources :users, only: [:create] do 
+    resources :gifs, only: [:index, :create, :destroy]
+  end 
+  resources :messages, only: [:create]
+ 
 end
