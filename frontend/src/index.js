@@ -59,9 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function liveSession() {
     let landingPage = document.getElementById('landing-page');
     let nav = document.getElementById('nav');
+    let userIdentification = document.getElementById('user-name')
     if (sessionStorage.getItem("user") ) {
       landingPage.style.display="none";
       nav.style.display=""
+      userIdentification.innerText = `Hello, ${sessionStorage.user}`
     } else {
       landingPage.style.display="";
       nav.style.display="none"
@@ -80,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // MESSAGES
   function createMessage() {
     let form = document.getElementById("twilio-form");
-
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         let inputs = document.getElementsByClassName('message-text');
@@ -133,7 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(value)
     .then(function(response) {
       return response.json();
-    }).then(function(json){
+    })
+    .then(function(json){
       json["data"].forEach(element => {
         let newGif = new Gif(null, element["images"]["fixed_height"]["url"], sessionStorage.id)
         newGif.renderGif()

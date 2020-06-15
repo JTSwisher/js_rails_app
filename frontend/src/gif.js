@@ -13,7 +13,6 @@ class Gif {
         this.user_id = user_id
     }
 
-
     renderGif() {
         let gifObject = this;
         let img = document.createElement('img');
@@ -125,7 +124,8 @@ class Gif {
         fetch(`http://localhost:3000/users/${user_id}/gifs`, configObj)
         .then(function(response) {
             return response.json();
-        }).then(function(json){
+        })
+        .then(function(json){
             json.forEach(element => {
                 let newGif = new Gif(element.id, element.url, element.user_id)
                 newGif.renderGif()

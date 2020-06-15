@@ -59,6 +59,10 @@ html, body {
     text-align: center;
     margin-top: 15px;
   }
+
+  #user-name {
+    margin: 5px 10px 5px 4px;
+  }
   
   .hr {
     height: 1.3px;
