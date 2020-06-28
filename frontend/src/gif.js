@@ -7,7 +7,7 @@ gifContainer.appendChild(cardDeck)
 
 class Gif {
 
-    constructor(id=null, url, user_id=null) {
+    constructor(id=null, url, user_id) {
         this.id =  id,
         this.url =  url,
         this.user_id = user_id
@@ -65,7 +65,7 @@ class Gif {
 
     static messageEvent(gif) {
         let gifValue = document.getElementById('message-gif')
-        $('#exampleModal')
+        $('#messageModal')
         .on('show.bs.modal', function() {
           gifValue.value = gif.url
         }).modal('show');
@@ -113,15 +113,8 @@ class Gif {
     static getUserGifs(user_id) {
         Gif.clearGifResults()
         myGifsTitle.style.display = ""
-        let configObj = {
-            method: "get", 
-            headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-            },
-        };
         
-        fetch(`http://localhost:3000/users/${user_id}/gifs`, configObj)
+        fetch(`http://localhost:3000/users/${user_id}/gifs`)
         .then(function(response) {
             return response.json();
         })
@@ -131,15 +124,10 @@ class Gif {
                 newGif.renderGif()
             })
         })
+    
     }
 
     static clearGifResults() {
         cardDeck.innerHTML = ""
     }
 }
-
-
-
-
-
-

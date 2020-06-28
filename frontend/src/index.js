@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
               sessionStorage.setItem('user', object.username)
               liveSession();
             }
-            
           })
         event.target.reset();
       })

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
            else
             render json: {errors: 'Error signing in, please try again.'}
            end 
-        else
+        else #create new user if existing user not found
             user = User.new(user_params)
             if user.save
                 render json: user
